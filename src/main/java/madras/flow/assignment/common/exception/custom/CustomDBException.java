@@ -11,7 +11,7 @@ import madras.flow.assignment.common.enums.CodeEnum;
  * reference :
  *
  * author : 임현영
- * date : 2024.04.16
+ * date : 2024.05.31
  **/
 @Getter
 public class CustomDBException extends RuntimeException {
