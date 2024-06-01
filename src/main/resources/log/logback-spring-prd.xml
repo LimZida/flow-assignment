@@ -5,14 +5,14 @@
 
     <!-- 로그 출력 패턴 -->
     <property name="LOG_PATTERN"
-              value="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] [%X{transactionId}]  %clr(%-5level) %clr(${PID:-}){magenta} %clr(%-40.40logger{36}){cyan} %clr(:){faint} %msg%n"/>
+              value="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] [%thread]  %clr(%-5level) %clr(${PID:-}){magenta} %clr(%-40.40logger{36}){cyan} %clr(:){faint} %msg%n"/>
     <!-- 로그 저장 패턴 -->
     <property name="LOG_SAVE_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-4relative --- [%X{transactionId}] %logger{35} - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-4relative --- [%thread] %logger{35} - %msg%n"/>
 
 
     <!-- 로그 파일이 저장될 경로 -->
-    <property name="LOG_PATH" value="/data/assignment/logs"/>
+    <property name="LOG_PATH" value="/data/was/logs"/>
 
     <!-- 로그 파일 이름 -->
     <property name="LOG_FILE_NAME" value="logfiles-${spring.profiles.active}"/>
@@ -28,7 +28,7 @@
 
         아래에서는 info로 설정하였는데, 이 경우엔 INFO 보다 위에 있는 DEBUG와 TRACE는 표시하지 않는다.
     -->
-    <property name="LOG_LEVEL" value="INFO"/>
+    <property name="LOG_LEVEL" value="DEBUG"/>
 
     <!-- CONSOLE에 로그 출력 세팅 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
