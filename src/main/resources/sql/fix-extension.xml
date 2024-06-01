@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="madras.flow.assignment.extension.fix.repository.FixExtensionRepository">
+
+	<!-- 고정 확장자 리스트 조회-->
+	<select id="selectFixExtensionList" resultType="madras.flow.assignment.extension.fix.entity.FixExtensionEntity$extension">
+		SELECT
+			fe.ext_name as extensionName,
+			fe.use_yn as extensionUsage
+		FROM
+			fix_extension fe
+	</select>
+
+	<!-- 고정 확장자 사용여부 조회-->
+	<select id="selectFixExtensionUseYn" resultType="madras.flow.assignment.extension.fix.entity.FixExtensionEntity$usage" parameterType="madras.flow.assignment.extension.fix.dto.FixExtensionReqDTO$updateInfo">
+		SELECT
+			fe.use_yn as extensionUsage
+		FROM
+			fix_extension fe
+		WHERE
+			fe.ext_name = #{updatedExtension}
+	</select>
+
+	<!-- 고정 확장자 수정 -->
+	<update id="updateFixExtension" parameterType="madras.flow.assignment.extension.fix.entity.FixExtensionEntity$updateInfo">
+		UPDATE
+			fix_extension fe
+		SET
+			fe.use_yn = #{useYn},
+			fe.update_date = now()
+		WHERE
+			fe.ext_name = #{updatedExtension}
+	</update>
+
+
+</mapper>
