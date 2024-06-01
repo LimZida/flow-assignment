@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="madras.flow.assignment.extension.custom.repository.CustomExtensionRepository">
+
+	<!-- 커스텀 확장자 조회-->
+	<select id="selectCustomExtensionList" resultType="madras.flow.assignment.extension.custom.entity.CustomExtensionEntity$extension">
+		SELECT
+			ce.ext_name as extensionName
+		FROM
+			custom_extension ce
+	</select>
+
+	<!-- 커스텀 확장자 개수 조회-->
+	<select id="countCustomExtensionList" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			custom_extension ce
+	</select>
+
+	<!-- 커스텀, 고정 확장자 카운트 -->
+	<select id="isRequestExtensionExist" parameterType="madras.flow.assignment.extension.custom.entity.CustomExtensionEntity$insertInfo" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM (
+			SELECT
+				ce.ext_name as extensionName
+			FROM
+				custom_extension ce
+			WHERE
+				ce.ext_name = #{insertedExtension}
+
+			UNION ALL
+
+			SELECT
+				fe.ext_name as extensionName
+			FROM
+				fix_extension fe
+			WHERE
+				fe.ext_name = #{insertedExtension}
+		) sum_count
+	</select>
+
+	<!-- 커스텀 확장자 등록 -->
+	<insert id="insertCustomExtension"  parameterType="madras.flow.assignment.extension.custom.entity.CustomExtensionEntity$insertInfo">
+		INSERT INTO
+			custom_extension
+			(ext_name, create_date, update_date)
+		VALUES
+			(#{insertedExtension}, now(), now());
+	</insert>
+
+	<!-- 커스텀 확장자 삭제 -->
+	<delete id="deleteCustomExtension" parameterType="madras.flow.assignment.extension.custom.dto.CustomExtensionReqDTO$deleteInfo">
+		DELETE
+		FROM
+			custom_extension ce
+		WHERE
+			ce.ext_name = #{deletedExtension}
+	</delete>
+
+
+</mapper>
