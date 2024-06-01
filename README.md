@@ -6,13 +6,13 @@
 SpringBoot 2.7 , Java 11, MariaDB, Maven, IntellJ, GIT, SourceTree
 
 개발서버: localhost:9098
-운영서버: https://54.180.45.23:9098
+운영서버: https://54.180.45.23
 ```
 
 # Welcome API 실행 (health-check)
 
 ```
-$ curl ${context}:9098/flow
+$ curl ${context}/flow
 >>> Welcome Json
 ```
 
