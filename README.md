@@ -14,7 +14,7 @@ Maven 3, IntellJ, GIT, SourceTree, Apache 2.4 , Tomcat 9
 # Welcome API 실행 (health-check)
 
 ```
-$ curl ${context}/flow
+$ curl {-k} ${context}/flow
 >>> Welcome Json
 ```
 
