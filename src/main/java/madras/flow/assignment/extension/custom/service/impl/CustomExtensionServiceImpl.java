@@ -128,7 +128,7 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
         }
 
         if (customExtensionSize > 200){
-            throw new CustomServiceException(ErrorEnum.CEC05.name(),ErrorEnum.CEC05.getValue(),null);
+            throw new CustomServiceException(ErrorEnum.CEC03.name(),ErrorEnum.CEC03.getValue(),null);
         }
     }
 

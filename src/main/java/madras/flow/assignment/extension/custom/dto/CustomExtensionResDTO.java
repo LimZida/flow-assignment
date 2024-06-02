@@ -19,12 +19,10 @@ public class CustomExtensionResDTO {
     // ex)
     //    "extensionList": [
     //        {
-    //            "extensionName": "etc",
-    //            "extensionUsage": "Y",
+    //            "extensionName": "etc"
     //        },
     //        {
-    //            "extensionName": "etc2",
-    //            "extensionUsage": "Y",
+    //            "extensionName": "etc2"
     //        } ...
     //    ]
     @Getter
@@ -41,8 +39,7 @@ public class CustomExtensionResDTO {
 
     // 커스텀 확장자
     //       {
-    //           "extensionName": "etc",
-    //           "extensionUsage": "Y"
+    //           "extensionName": "etc"
     //       }
     @Getter
     @NoArgsConstructor(access = AccessLevel.PRIVATE) //파라미터가 없는 생성자 생성

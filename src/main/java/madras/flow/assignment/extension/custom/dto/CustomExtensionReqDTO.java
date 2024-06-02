@@ -3,7 +3,6 @@ package madras.flow.assignment.extension.custom.dto;
 import lombok.*;
 import madras.flow.assignment.common.enums.ErrorEnum;
 import madras.flow.assignment.common.exception.custom.CustomRequestException;
-import org.springframework.http.HttpStatus;
 
 /**
  * title : CustomExtensionDTO
@@ -34,7 +33,7 @@ public class CustomExtensionReqDTO {
         public void validate(){
             // 확장자명 입력길이 20 초과
             if (insertedExtension.length() > 20){
-                throw new CustomRequestException(ErrorEnum.CEC06.name(), ErrorEnum.CEC06.getValue(), null);
+                throw new CustomRequestException(ErrorEnum.CEC04.name(), ErrorEnum.CEC04.getValue(), null);
             }
 
             // 요청값이 빈값인 경우
