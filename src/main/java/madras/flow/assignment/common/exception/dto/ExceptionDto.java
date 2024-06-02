@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
  * date : 2024.05.31
  **/
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED) //파라미터가 없는 생성자 생성
+@NoArgsConstructor(access = AccessLevel.PRIVATE) //파라미터가 없는 생성자 생성
 public class ExceptionDto {
     private String errorCode;
     private String errorMessage;
