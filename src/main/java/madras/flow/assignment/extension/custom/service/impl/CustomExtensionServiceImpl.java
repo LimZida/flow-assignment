@@ -37,8 +37,8 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     @Transactional(readOnly = true)
     @Override
     public CustomExtensionResDTO.extensionList selectCustomExtensionList() {
+        // 리스트 조회
         List<CustomExtensionResDTO.extension> customExtensionList = getExtensionList();
-
 
         return CustomExtensionResDTO.extensionList.builder()
                 .extensionList(customExtensionList)
@@ -98,7 +98,6 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
         // 리스트 조회
         List<CustomExtensionResDTO.extension> customExtensionList = getExtensionList();
 
-
         return CustomExtensionResDTO.extensionList.builder()
                 .extensionList(customExtensionList)
                 .build();
@@ -111,10 +110,12 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     // 확장자 조회여부 함수
     private synchronized void validateExtensionExist(CustomExtensionReqDTO.insertInfo insertInfo){
         Integer extensionExist = customExtensionRepository.isRequestExtensionExist(insertMapping(insertInfo));
+        // DB 조회 오류
         if(extensionExist == null){
             throw new CustomServiceException(ErrorEnum.DATA01.name(),ErrorEnum.DATA01.getValue(),null);
         }
 
+        // 이미 확장자 존재하면 등록 예외
         if (extensionExist > 0){
             throw new CustomServiceException(ErrorEnum.CEC02.name(),ErrorEnum.CEC02.getValue(),null);
         }
@@ -123,11 +124,13 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     // 사이즈 조회 함수
     private synchronized void validateCustomExtensionSize(){
         Integer customExtensionSize = customExtensionRepository.countCustomExtensionList();
+        // DB 조회 오류
         if(customExtensionSize == null){
             throw new CustomServiceException(ErrorEnum.DATA02.name(),ErrorEnum.DATA02.getValue(),null);
         }
 
-        if (customExtensionSize > 200){
+        // 커스텀 확장자 200개 초과 예외
+        if (customExtensionSize >= 200){
             throw new CustomServiceException(ErrorEnum.CEC03.name(),ErrorEnum.CEC03.getValue(),null);
         }
     }
@@ -135,10 +138,12 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     // 등록 및 검증 함수
     private void  getInsertCustomExtension(CustomExtensionReqDTO.insertInfo insertInfo){
         Integer insertCustomExtension = customExtensionRepository.insertCustomExtension(insertMapping(insertInfo));
+        // DB insert 오류
         if (insertCustomExtension == null ){
             throw new CustomDBException(ErrorEnum.DATA03.name(),ErrorEnum.DATA03.getValue(),null);
         }
 
+        // DB insert 결과가 없다면 예외
         if (insertCustomExtension < 1){
             throw new CustomDBException(ErrorEnum.CEC01.name(),ErrorEnum.CEC01.getValue(),null);
         }
@@ -155,10 +160,12 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     // 삭제 및 검증 함수
     private void getDeleteCustomExtension(CustomExtensionReqDTO.deleteInfo deleteInfo){
         Integer deleteCustomExtension = customExtensionRepository.deleteCustomExtension(deleteMapping(deleteInfo));
+        // DB 삭제 오류
         if (deleteCustomExtension == null){
             throw new CustomDBException(ErrorEnum.DATA05.name(),ErrorEnum.DATA05.getValue(),null);
         }
 
+        // DB 삭제 결과값 없으면 예외
         if ( deleteCustomExtension < 1){
             throw new CustomDBException(ErrorEnum.CED01.name(),ErrorEnum.CED01.getValue(),null);
         }
@@ -174,6 +181,7 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     // 조회 함수
     private List<CustomExtensionResDTO.extension> getExtensionList(){
         List<CustomExtensionEntity.extension> extensionList = customExtensionRepository.selectCustomExtensionList();
+        // DB 리스트 조회 오류
         if (extensionList == null){
             throw new CustomDBException(ErrorEnum.CER01.name(),ErrorEnum.CER01.getValue(),null);
         }

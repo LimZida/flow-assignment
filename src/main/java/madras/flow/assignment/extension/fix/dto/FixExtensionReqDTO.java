@@ -7,9 +7,9 @@ import madras.flow.assignment.common.exception.custom.CustomRequestException;
 /**
  * title : FixExtensionResDTO
  *
- * description : 고정확장자 요청 매핑용 dto
+ * description : 고정확장자 요청 매핑용 dto ( Controller <-> Service간 사용)
  *
- * reference :
+ * reference : innerClass로 DTO 관리하기 https://velog.io/@kjyeon1101/Spring
  *
  * author : 임현영
  * date : 2024.05.30

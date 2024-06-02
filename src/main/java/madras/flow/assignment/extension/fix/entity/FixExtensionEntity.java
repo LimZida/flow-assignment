@@ -10,7 +10,7 @@ import java.util.List;
  *
  * description : 고정확장자 DAO <=> DB 접근 entitu
  *
- * reference :
+ * reference : innerClass로 DTO 관리하기 https://velog.io/@kjyeon1101/Spring
  *
  * author : 임현영
  * date : 2024.06.01

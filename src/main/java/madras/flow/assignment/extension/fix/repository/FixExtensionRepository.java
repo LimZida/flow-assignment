@@ -12,6 +12,7 @@ import java.util.List;
  *
  * description : FixExtension 쿼리 추상체 => fix-extension.xml
  *               selectFixExtensionList -> 모든 고정확장자 조회
+ *               selectFixExtensionUseYn -> 특정 고정확장자 사용여부 조회
  *               updateFixExtension ->  고정확장자 정보수정
  *
  * reference :

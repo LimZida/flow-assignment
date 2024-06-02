@@ -83,10 +83,12 @@ public class FixExtensionServiceImpl implements FixExtensionService {
     private void getUpdateFixExtension(FixExtensionReqDTO.updateInfo updateInfo){
         // 수정 진행
         Integer updateFixExtension = fixExtensionRepository.updateFixExtension(updateMapping(updateInfo));
+        // DB 업데이트 오류
         if (updateFixExtension == null){
             throw new CustomDBException(ErrorEnum.DATA04.name(),ErrorEnum.DATA04.getValue(),null);
         }
 
+        // 업데이트 결과 없다면 예외
         if (updateFixExtension < 1){
             throw new CustomDBException(ErrorEnum.FEU01.name(),ErrorEnum.FEU01.getValue(),null);
         }
@@ -94,10 +96,14 @@ public class FixExtensionServiceImpl implements FixExtensionService {
 
     // 고정확장자 정보 수정 검증 함수
     private void validateUpdateFixExtension(FixExtensionReqDTO.updateInfo updateInfo){
+        // 기존 사용정보 DB에서 조회
         FixExtensionEntity.usage fixExtension = fixExtensionRepository.selectFixExtensionUseYn(updateMapping(updateInfo));
 
+        // 변경 사용 상태
         String changedState = updateInfo.getUseYn();
+        // 기존 사용 상태
         String originalState = fixExtension.getExtensionUsage();
+
         // 변경하고자 하는 상태와 실제 DB값이 동일하면 Update 예외
         if(changedState.equals(originalState)){
             throw new CustomServiceException(ErrorEnum.FEU02.name(),ErrorEnum.FEU02.getValue(),null);
@@ -115,6 +121,7 @@ public class FixExtensionServiceImpl implements FixExtensionService {
     //리스트 조회
     private List<FixExtensionResDTO.extension> getExtensionList(){
         List<FixExtensionEntity.extension> extensionList = fixExtensionRepository.selectFixExtensionList();
+        // DB 조회 오류 시 예외
         if (extensionList == null){
             throw new CustomDBException(ErrorEnum.FER01.name(),ErrorEnum.FER01.getValue(),null);
         }

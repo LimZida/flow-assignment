@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
  *
  * description : 커스텀 확장자 Controller
  *
+ *               정상 처리 시 ResponseEntity<DTO> 응답
+ *               예외 처리 시 GlobalExceptionHandler ResponseEntity<ErrorDTO> 응답
+ *
  * reference :
  *
  *

@@ -7,9 +7,9 @@ import java.util.List;
 /**
  * title : CustomExtensionDTO
  *
- * description : 커스텀확장자 응답 매핑용 dto
+ * description : 커스텀확장자 응답 매핑용 dto ( Controller <-> Service간 사용)
  *
- * reference :
+ * reference : innerClass로 DTO 관리하기 https://velog.io/@kjyeon1101/Spring
  *
  * author : 임현영
  * date : 2024.05.30
