@@ -100,7 +100,7 @@ $ java -jar ./target/assignment-0.0.1-SNAPSHOT.jar
 1. 코드 작성 시 madras.flow.assignment 하위에 패키지 만들어 진행합니다. 
 ex) welcome 관련 기능은  madras.flow.assignment.welcome
 
-2. 특정 기능 내에 controller, dto, repository, service 패키지를 만들어 역할을 관리하고, 
+2. 특정 기능 내에 controller, dto, repository, entity, service 패키지를 만들어 역할을 관리하고, 
 파일 구조는 다음과 같이 정의합니다.
 ex) madras.flow.assignment.extension.all.controller
 => AllExtensionController
@@ -108,6 +108,8 @@ madras.flow.assignment.extension.all.service
 => AllExtensionService
 madras.flow.assignment.extension.all.service.impl
 => AllExtensionServiceImpl
+madras.flow.assignment.extension.all.entity
+=> AllExtensionEntity
 madras.flow.assignment.extension.all.dto 
 => AllExtensionReqDto
 => AllExtensionResDto
