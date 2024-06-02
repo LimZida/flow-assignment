@@ -8,7 +8,7 @@ Maven 3, IntellJ, GIT, SourceTree, Apache 2.4 , Tomcat 9
 
 개발서버: localhost:9098
 운영서버: https://54.180.45.23
-젠킨스 서버 : http://54.180.45.23:20904
+젠킨스서버: http://54.180.45.23:20904
 ```
 
 # Welcome API 실행 (health-check)
@@ -37,12 +37,6 @@ $ curl ${context}/flow
 │  │  │          │   └─util
 │  │  │          │   
 │  │  │          ├─extension
-│  │  │          │   ├─all 
-│  │  │          │   │  ├─controller
-│  │  │          │   │  ├─dto
-│  │  │          │   │  ├─repository
-│  │  │          │   │  └─service
-│  │  │          │   │  
 │  │  │          │   ├─custom 
 │  │  │          │   │  ├─controller
 │  │  │          │   │  ├─dto
