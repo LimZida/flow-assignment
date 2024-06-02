@@ -108,7 +108,7 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     * */
 
     // 확장자 조회여부 함수
-    private synchronized void validateExtensionExist(CustomExtensionReqDTO.insertInfo insertInfo){
+    private void validateExtensionExist(CustomExtensionReqDTO.insertInfo insertInfo){
         Integer extensionExist = customExtensionRepository.isRequestExtensionExist(insertMapping(insertInfo));
         // DB 조회 오류
         if(extensionExist == null){
