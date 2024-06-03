@@ -10,6 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 /**
@@ -60,15 +65,44 @@ class CustomExtensionServiceTest {
 
     @Test
     @Transactional
-    void insertCustomExtension() {
+    void insertCustomExtension() throws InterruptedException {
         // 1. insert시 기존과 겹치는 경우
         // 2. insert시 새로운거 등록되는 경우
         // 3. insert 정보가 20자 이상인경우
         // 4. list가 200개 이상인경우
         // 5. 요청값 누락된경우
-        CustomExtensionResDTO.extensionList extensionList = customExtensionService.insertCustomExtension(insertInfo);
+//        CustomExtensionResDTO.extensionList extensionList = customExtensionService.insertCustomExtension(insertInfo);
 
-        assertThat(extensionList.getExtensionList().size()).isEqualTo(10);
+
+        // 동시성 멀티스레드 환경 구현 test
+        // 부분적 validation 메소드 Synchronized 사용 불가 , size 공유하는 증상 있음
+        // 전체 insertCustomExtension 메소드 Synchronized 사용 가능, size 공유하지 않음
+        AtomicInteger listSize = new AtomicInteger();
+
+        // 스레드 개수
+        int numberOfThreads = 51;
+        // 풀 개수
+        ExecutorService service = Executors.newFixedThreadPool(5);
+        CountDownLatch latch = new CountDownLatch(numberOfThreads);
+        int count = 0;
+        for (int i = 0; i < numberOfThreads; i++) {
+            int finalCount = count;
+            service.submit(() -> {
+                insertInfo = CustomExtensionReqDTO.insertInfo.builder()
+                        .insertedExtension(String.valueOf(finalCount))
+                        .build();
+                CustomExtensionResDTO.extensionList extensionList = customExtensionService.insertCustomExtension(insertInfo);
+                // 순차적 사이즈 확인
+                log.info("#### size {}", extensionList.getExtensionList().size() );
+                listSize.set(extensionList.getExtensionList().size());
+                latch.countDown();
+            });
+            count++;
+        }
+        latch.await();
+
+//        assertThat(extensionList.getExtensionList().size()).isEqualTo(200);
+        assertThat(listSize).isEqualTo(50);
     }
 
     @Test
