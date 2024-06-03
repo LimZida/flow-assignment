@@ -45,7 +45,7 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
                 .build();
     }
 
-    // 커스텀 확장자 등록
+    // 커스텀 확장자 등록 (동기처리)
     /*
     *
     * 1. 해당 확장자가 기존 커스텀, 고정 확장자 테이블에 있는지 조회한다.
@@ -60,12 +60,13 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     * */
     @Transactional
     @Override
-    public CustomExtensionResDTO.extensionList insertCustomExtension(CustomExtensionReqDTO.insertInfo insertInfo) {
-        // 해당 확장자가 기존 커스텀, 고정 확장자 테이블에 있는지 조회한다. (동기처리)
+    public synchronized CustomExtensionResDTO.extensionList insertCustomExtension(CustomExtensionReqDTO.insertInfo insertInfo) {
+        // 커스텀 확장자 사이즈를 조회한다.
+        validateCustomExtensionSize();
+
+        // 해당 확장자가 기존 커스텀, 고정 확장자 테이블에 있는지 조회한다.
         validateExtensionExist(insertInfo);
 
-        // 커스텀 확장자 사이즈를 조회한다. (동기처리)
-        validateCustomExtensionSize();
 
         // 커스텀 확장자 등록
         getInsertCustomExtension(insertInfo);
@@ -122,7 +123,7 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     }
 
     // 사이즈 조회 함수
-    private synchronized void validateCustomExtensionSize(){
+    private void validateCustomExtensionSize(){
         Integer customExtensionSize = customExtensionRepository.countCustomExtensionList();
         // DB 조회 오류
         if(customExtensionSize == null){
