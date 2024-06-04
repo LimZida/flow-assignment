@@ -78,11 +78,19 @@ $ curl {-k} ${context}/flow
 ```
 # 서비스 구조
 ```
-WEB (apache 2.4) - Client 정적 리소스
- │
- ├─ AJP CONNECTION
- │
-WAS (tomcat 9) - Server 리소스
+EC2 (AWS linux) --------------------------
+│                                         │
+│    WEB (apache 2.4) - Client 정적 리소스 │
+│    │                                    │
+│    ├─ AJP CONNECTION                    │
+│    │                                    │
+│    WAS (tomcat 9) - Server 리소스        │
+│                                         │
+│ ----------------------------------------
+    │
+    │
+ [AWS RDS - mysql]
+
 
 ```
 
