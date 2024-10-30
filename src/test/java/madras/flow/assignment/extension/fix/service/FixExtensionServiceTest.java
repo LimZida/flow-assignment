@@ -34,7 +34,7 @@ class FixExtensionServiceTest {
     void setUp() {
         updateInfo = FixExtensionReqDTO.updateInfo.builder()
                 .updatedExtension("exe")
-                .useYn("N")
+                .useYn("Y")
                 .build();
     }
 

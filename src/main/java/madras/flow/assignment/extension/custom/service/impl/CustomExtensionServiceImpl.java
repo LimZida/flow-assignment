@@ -60,24 +60,23 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
     * */
     @Transactional
     @Override
-    public synchronized CustomExtensionResDTO.extensionList insertCustomExtension(CustomExtensionReqDTO.insertInfo insertInfo) {
+    public CustomExtensionResDTO.extensionList insertCustomExtension(CustomExtensionReqDTO.insertInfo insertInfo) {
         // 커스텀 확장자 사이즈를 조회한다.
         validateCustomExtensionSize();
 
         // 해당 확장자가 기존 커스텀, 고정 확장자 테이블에 있는지 조회한다.
-        validateExtensionExist(insertInfo);
-
+//        validateExtensionExist(insertInfo);
 
         // 커스텀 확장자 등록
         getInsertCustomExtension(insertInfo);
 
         // 리스트 조회
-        List<CustomExtensionResDTO.extension> customExtensionList = getExtensionList();
+//        List<CustomExtensionResDTO.extension> customExtensionList = getExtensionList();
 
-
-        return CustomExtensionResDTO.extensionList.builder()
-                .extensionList(customExtensionList)
-                .build();
+        return null;
+//        return CustomExtensionResDTO.extensionList.builder()
+//                .extensionList(customExtensionList)
+//                .build();
     }
 
     // 커스텀 확장자 삭제
@@ -196,6 +195,6 @@ public class CustomExtensionServiceImpl implements CustomExtensionService {
                         CustomExtensionResDTO.extension.builder()
                         .extensionName(entity.getExtensionName())
                         .build())
-                        .collect(Collectors.toList());
+                        .collect(Collectors.toUnmodifiableList());
     }
 }
